@@ -1,0 +1,12 @@
+apiVersion: 1
+
+datasources:
+  - name: Postgres
+    type: postgres
+    url: localhost:5432
+    uid: 1234simpledatasource1234
+    user: egorB
+    secureJsonData:
+      password: '12345678'
+    jsonData:
+      database: task
