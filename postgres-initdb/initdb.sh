@@ -17,5 +17,6 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
     ALTER SYSTEM SET ssl TO 'ON';
 EOSQL
 
-sed '$ d' /var/lib/postgresql/data/pgdata/pg_hba.conf
-#echo 'hostssl	all	    all		10.129.0.0/24		cert' >> /var/lib/postgresql/data/pgdata/pg_hba.conf
+sed -i '$ d' /var/lib/postgresql/data/pgdata/pg_hba.conf
+
+echo 'hostssl	all	    all		10.129.0.0/24		cert' >> /var/lib/postgresql/data/pgdata/pg_hba.conf
