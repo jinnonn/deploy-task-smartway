@@ -3,7 +3,7 @@ apiVersion: 1
 datasources:
   - name: Postgres
     type: postgres
-    url: 10.129.0.31:5432
+    url: 10.129.0.13:5432
     uid: 1234simpledatasource1234
     user: egoruser
     secureJsonData:
