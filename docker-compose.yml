@@ -8,7 +8,7 @@ services:
       GF_PATHS_CONFIG: /etc/grafana/custom.ini
       GF_PATHS_PROVISIONING: 	/etc/grafana/provisioning
     ports:
-      - 80:3000
+      - 3000:3000
     volumes:
       - ./grafana:/etc/grafana
       - grafana-data:/var/lib/grafana
@@ -16,21 +16,26 @@ services:
       - Bobkov-E-O-deploy-task
     restart: unless-stopped
 
-  # postgres:
-  #   image: postgres:13.3
-  #   container_name: deploy-task-postgresql
-  #   environment:
-  #     POSTGRES_DB: "egordb"
-  #     POSTGRES_USER: "egoruser"
-  #     POSTGRES_PASSWORD: "12345678"
-  #   ports:
-  #     - "5432:5432"
-  #   networks:
-  #     - Bobkov-E-O-deploy-task
-  #   restart: unless-stopped
+  postgres:
+    image: postgres:16.1
+    container_name: deploy-task-postgresql
+    environment:
+      POSTGRES_DB: "egordb"
+      POSTGRES_USER: "egoruser"
+      POSTGRES_PASSWORD: "12345678"
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres:/etc/postgresql/14/main/
+      - postgres-data:/var/lib/postgresql/data/pgdata
+    networks:
+      - Bobkov-E-O-deploy-task
+    restart: unless-stopped
 
 volumes:
   grafana-data:
+  postgres-data:
 
 networks:
   Bobkov-E-O-deploy-task:
