@@ -20,3 +20,4 @@ EOSQL
 sed -i '$ d' /var/lib/postgresql/data/pgdata/pg_hba.conf
 
 echo 'hostssl	all	    all		10.129.0.0/24		cert' >> /var/lib/postgresql/data/pgdata/pg_hba.conf
+echo 'hostssl	all	    all		10.5.0.0/16		cert' >> /var/lib/postgresql/data/pgdata/pg_hba.conf
