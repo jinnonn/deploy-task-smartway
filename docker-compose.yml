@@ -27,8 +27,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres:/etc/postgresql/14/main/
-      - postgres-data:/var/lib/postgresql/data/pgdata
+      - ./postgres-initdb:/docker-entrypoint-initdb.d
+      - postgres-data:/var/lib/postgresql/data
     networks:
       - Bobkov-E-O-deploy-task
     restart: unless-stopped

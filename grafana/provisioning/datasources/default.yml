@@ -3,10 +3,11 @@ apiVersion: 1
 datasources:
   - name: Postgres
     type: postgres
-    url: localhost:5432
+    url: 10.129.0.28:5432
     uid: 1234simpledatasource1234
-    user: egorB
+    user: egoruser
     secureJsonData:
       password: '12345678'
     jsonData:
-      database: task
+      database: egordb
+      # sslmode: 'disable'
