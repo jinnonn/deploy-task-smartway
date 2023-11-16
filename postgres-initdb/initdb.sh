@@ -9,8 +9,6 @@ openssl req -x509 -in server.req -text -key server.key -out server.crt
 chmod 600 server.key
 test $(uname -s) == Linux && chown 999 server.key
 
-cd
-
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
     ALTER SYSTEM SET ssl_cert_file TO '/var/lib/postgresql/certs/server.crt';
     ALTER SYSTEM SET ssl_key_file TO '/var/lib/postgresql/certs/server.key';
