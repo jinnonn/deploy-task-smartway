@@ -9,7 +9,7 @@ echo "server {
     access_log /var/log/nginx/blog.zeroxzed.ru-access.log;
     error_log /var/log/nginx/blog.zeroxzed.ru-error.log;
 
-location /grafana/ {
+location / {
     proxy_pass http://10.129.0.13:3000;
     proxy_set_header Host \$host;
     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
