@@ -10,4 +10,3 @@ datasources:
       password: '12345678'
     jsonData:
       database: egordb
-      # sslmode: 'disable'

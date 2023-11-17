@@ -1,1 +1,0 @@
-openssl req -x509 -nodes -newkey rsa:4096 -subj /CN=localhost -keyout deploy-task-smartway/grafana-key/grafana.key -out deploy-task-smartway/grafana-key/grafana.csr -days 365

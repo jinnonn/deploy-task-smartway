@@ -10,7 +10,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./grafana:/etc/grafana
+      - ./grafana:/etc/grafana    
       - grafana-data:/var/lib/grafana
     networks:
       - Bobkov-E-O-deploy-task
