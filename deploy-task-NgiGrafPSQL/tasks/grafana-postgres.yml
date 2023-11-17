@@ -32,31 +32,15 @@
     
   - name: Put docker-compose on remote host
     ansible.builtin.copy:
-      src: docker-compose.yml
-      dest: /home/jinon/ansible-play-compose/
+      src: psql_grafana
+      dest: /home/jinon/
       owner: jinon
       group: jinon
       mode: 0664
 
-  - name: Put docker-compose on remote host
-    ansible.builtin.copy:
-      src: grafana
-      dest: /home/jinon/ansible-play-compose/
-      owner: jinon
-      group: jinon
-      mode: 755
-
-  - name: Put docker-compose on remote host
-    ansible.builtin.copy:
-      src: postgres-initdb
-      dest: /home/jinon/ansible-play-compose/
-      owner: jinon
-      group: jinon
-      mode: 755
-
   - name: Starting containers via docker-compose
     community.docker.docker_compose:
-      project_src: /home/jinon/ansible-play-compose/
+      project_src: /home/jinon/psql_grafana/
     vars:
       ansible_python_interpreter: /bin/python3
     register: docker_output
