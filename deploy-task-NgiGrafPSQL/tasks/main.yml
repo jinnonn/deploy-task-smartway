@@ -1,0 +1,5 @@
+---
+  - import_tasks: grafana-postgres.yml
+    when: "'grafana-postgres' in {{group_names}}"
+  - import_tasks: nginx.yml
+    when: "'nginx' in {{group_names}}"

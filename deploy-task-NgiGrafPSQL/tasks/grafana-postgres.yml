@@ -1,0 +1,66 @@
+--- # Grafana and docker deployment
+
+  - name: Put docker install script on remote host
+    ansible.builtin.copy:
+      src: docker-install.sh
+      dest: /tmp
+      owner: jinon
+      group: jinon
+      mode: 755
+  
+  - name: Start docker installation
+    ansible.builtin.command: 
+      cmd: /tmp/docker-install.sh
+    register: docker_install_output
+  
+  - name: installation debug
+    ansible.builtin.debug:
+      var: docker_install_output.stdout_lines
+
+  - name: Install pip3
+    ansible.builtin.apt:
+      name: python3-pip
+      state: present
+
+  - name: Install docker python package
+    ansible.builtin.pip:
+      name: docker
+    
+  - name: Install docker python package
+    ansible.builtin.pip:
+      name: docker-compose
+    
+  - name: Put docker-compose on remote host
+    ansible.builtin.copy:
+      src: docker-compose.yml
+      dest: /home/jinon/ansible-play-compose/
+      owner: jinon
+      group: jinon
+      mode: 0664
+
+  - name: Put docker-compose on remote host
+    ansible.builtin.copy:
+      src: grafana
+      dest: /home/jinon/ansible-play-compose/
+      owner: jinon
+      group: jinon
+      mode: 755
+
+  - name: Put docker-compose on remote host
+    ansible.builtin.copy:
+      src: postgres-initdb
+      dest: /home/jinon/ansible-play-compose/
+      owner: jinon
+      group: jinon
+      mode: 755
+
+  - name: Starting containers via docker-compose
+    community.docker.docker_compose:
+      project_src: /home/jinon/ansible-play-compose/
+    vars:
+      ansible_python_interpreter: /bin/python3
+    register: docker_output
+
+  - name: Docker up debug
+    ansible.builtin.debug:
+      var: docker_output

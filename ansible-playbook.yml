@@ -1,0 +1,45 @@
+---
+- name: deploy-grafana-postgres
+  hosts: grafana-postgres
+  become: yes
+  tasks:
+    - name: Deploying grafana and postgres containers
+      import_role:
+        name: deploy-task-NgiGrafPSQL
+        
+
+#   tasks:
+#     - name: Installing docker and docker compose
+
+#     - name: Checknig motd changes
+#       ansible.builtin.command: 
+#         cmd: run-parts /etc/update-motd.d
+#       register: output
+#       tags:
+#         - check-1
+
+# - name: ansible-playbook
+#   hosts: test
+#   become: yes
+#   tasks:
+#     - name: Create 99-hello for adding "Hello Netology!" to motd
+#       ansible.builtin.lineinfile:
+#         path: /etc/update-motd.d/00-header
+#         regexp: '^printf'
+#         line: '{{ item }}'
+#       with_items:
+#         # - '#!/bin/bash'
+#         - 'printf "Welcome to $( hostname ) {{ ansible_default_ipv4.address }}. Have a great day dear administrator!"'
+#       tags:
+#         - motd-change
+#     - name: Checknig motd changes
+#       ansible.builtin.command: 
+#         cmd: run-parts /etc/update-motd.d
+#       register: output
+#       tags:
+#         - check-1
+#     - name: Debugging motd changes
+#       ansible.builtin.debug:
+#         var: output.stdout_lines
+#       tags:
+#         - check-2
