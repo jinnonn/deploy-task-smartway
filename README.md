@@ -20,4 +20,4 @@ ansible-playbook ansible-playbook.yml -v
 ```
 - Конфиг дашбордов графаны статичен и также находится в deploy-task-NgiGrafPSQL/files/psql_grafana/grafana/provisioning/dashboards
 - Для генерации SSL сертификата в контейнере с PostgreSQL (и последующей активацией сертификата для БД) используется скрипт initbd.sh который с помощью docker-compose.yml передается в docker-entrypoint образа postgres.
-- Конфиги nginx, datasouce для графаны, docker-compose.yml и custom.ini для графаны располагаются в templates роли и описаны с помощью jinja2.
+- Конфиги nginx, datasouce для графаны, docker-compose.yml, custom.ini для графаны, а также скрипт initdb.sh располагаются в templates роли и описаны с помощью jinja2.
