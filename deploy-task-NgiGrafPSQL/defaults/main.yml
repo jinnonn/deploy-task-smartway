@@ -23,11 +23,11 @@
   group: jinon
 
   # Address of the nginx proxy server
-  public_ip: 62.84.120.186
-  private_ip: 10.129.0.13
+  public_ip: 51.250.110.180
+  private_ip: 10.129.0.22
 
   # Address of the node with grafana
-  grafana_ip: 10.129.0.25
+  grafana_ip: 10.129.0.15
 
   # Net of your cloud nodes
   cloud_nodes_network: 10.129.0.0/24
