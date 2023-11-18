@@ -28,3 +28,6 @@
 
   # Address of the node with grafana
   grafana_ip: 10.129.0.25
+
+  # Net of your cloud nodes
+  cloud_nodes_network: 10.129.0.0/24

@@ -1,21 +1,49 @@
 --- # Grafana and docker deployment
+  # - name: Check that the somefile.conf exists
+  #   ansible.builtin.stat:
+  #     path: /home/{{ owner }}/.ssh/id_rsa
+  #   register: stat_result  
 
-  - name: Put docker install script on remote host
-    ansible.builtin.copy:
-      src: docker-install.sh
-      dest: /tmp
-      owner: "{{ owner }}"
-      group: "{{ group }}"
-      mode: 755
+  # - name: debug
+  #   ansible.builtin.debug:
+  #     var: stat_result    
   
-  - name: Start docker installation
-    ansible.builtin.command: 
-      cmd: /tmp/docker-install.sh
-    register: docker_install_output
-  
-  - name: installation debug
-    ansible.builtin.debug:
-      var: docker_install_output.stdout_lines
+  # - name: Generate an ssh keys
+  #   ansible.builtin.command: 
+  #     cmd: ssh-keygen -f test/id_rsa -N ''
+  #   when: not stat_result['stat']['exists']
+
+  - name: Pre-installation for gpg
+    ansible.builtin.apt:
+      pkg:
+      - ca-certificates
+      - curl
+      - gnupg
+      update_cache: true
+
+  - name: Add docker GPG key
+    ansible.builtin.get_url:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      dest: /etc/apt/trusted.gpg.d/docker.asc
+      mode: 0644
+      force: true
+
+  - name: Add docker repository to apt
+    ansible.builtin.apt_repository:
+      repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu   jammy stable"
+      state: present
+      filename: "docker"
+      update_cache: true  
+
+  - name: Docker installation
+    ansible.builtin.apt:
+      pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+      update_cache: true      
 
   - name: Install pip3
     ansible.builtin.apt:
@@ -58,6 +86,14 @@
     template:
       src: "docker-compose.yml.jinja2"
       dest: /home/{{ owner }}/psql_grafana/docker-compose.yml
+      owner: "{{ owner }}"
+      group: "{{ group }}"
+      mode: 0755 
+
+  - name: Put postgresql initdb script from jinja template
+    template:
+      src: "initdb.sh.jinja2"
+      dest: /home/{{ owner }}/psql_grafana/postgres-initdb/initdb.sh
       owner: "{{ owner }}"
       group: "{{ group }}"
       mode: 0755 
