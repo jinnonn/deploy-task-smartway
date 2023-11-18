@@ -18,4 +18,4 @@ EOSQL
 sed -i '$ d' /var/lib/postgresql/data/pgdata/pg_hba.conf
 
 echo 'hostssl	all	    all		10.129.0.0/24		scram-sha-256' >> /var/lib/postgresql/data/pgdata/pg_hba.conf
-echo 'hostssl	all	    all		10.5.0.0/16		scram-sha-256' >> /var/lib/postgresql/data/pgdata/pg_hba.conf
+echo 'hostssl	all	    all		{{ subnet }}		scram-sha-256' >> /var/lib/postgresql/data/pgdata/pg_hba.conf
