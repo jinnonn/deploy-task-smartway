@@ -1,2 +1,8 @@
 ---
 # defaults file for deploy-task-NgiGrafPSQL
+
+  # for custom.ini grafana config file
+  admin_user: BobkovEO
+  admin_password: 12345678
+
+  #
