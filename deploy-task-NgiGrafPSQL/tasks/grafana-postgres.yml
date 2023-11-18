@@ -1,18 +1,4 @@
 --- # Grafana and docker deployment
-  # - name: Check that the somefile.conf exists
-  #   ansible.builtin.stat:
-  #     path: /home/{{ owner }}/.ssh/id_rsa
-  #   register: stat_result  
-
-  # - name: debug
-  #   ansible.builtin.debug:
-  #     var: stat_result    
-  
-  # - name: Generate an ssh keys
-  #   ansible.builtin.command: 
-  #     cmd: ssh-keygen -f test/id_rsa -N ''
-  #   when: not stat_result['stat']['exists']
-
   - name: Pre-installation for gpg
     ansible.builtin.apt:
       pkg:
