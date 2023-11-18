@@ -5,4 +5,19 @@
   admin_user: BobkovEO
   admin_password: 12345678
 
-  #
+  # for postgresql + grafana datasource
+  uid: 1234simpledatasource1234
+  user: egoruser
+  password: '12345678'
+  database: egordb
+
+  # for docker-compose.yml
+  container_name_grafana: deploy-task-grafana
+  container_name_postgres: deploy-task-postgresql
+  network_name: Bobkov-E-O-deploy-task
+  subnet: 10.5.0.0/16
+  gateway: 10.5.0.1
+
+  # owner and group
+  owner: jinon
+  group: jinon

@@ -4,8 +4,8 @@
     ansible.builtin.copy:
       src: docker-install.sh
       dest: /tmp
-      owner: jinon
-      group: jinon
+      owner: "{{ owner }}"
+      group: "{{ group }}"
       mode: 755
   
   - name: Start docker installation
@@ -33,22 +33,38 @@
   - name: Put docker-compose on remote host
     ansible.builtin.copy:
       src: psql_grafana
-      dest: /home/jinon/
-      owner: jinon
-      group: jinon
+      dest: /home/{{ owner }}/
+      owner: "{{ owner }}"
+      group: "{{ group }}"
       mode: 0664
 
   - name: Put custom.ini from jinja template
     template:
       src: "custom.ini.jinja2"
-      dest: /home/jinon/psql_grafana/custom.ini.jinja2
-      owner: jinon
-      group: jinon
-      mode: 0755    
+      dest: /home/{{ owner }}/psql_grafana/grafana/custom.ini
+      owner: "{{ owner }}"
+      group: "{{ group }}"
+      mode: 0755   
+
+  - name: Put datasource postgresql yml file from jinja template
+    template:
+      src: "default.yml.jinja2"
+      dest: /home/{{ owner }}/psql_grafana/grafana/provisioning/datasources/default.yml
+      owner: "{{ owner }}"
+      group: "{{ group }}"
+      mode: 0755 
+
+  - name: Put docker-compose.yml from jinja template
+    template:
+      src: "docker-compose.yml.jinja2"
+      dest: /home/{{ owner }}/psql_grafana/docker-compose.yml
+      owner: "{{ owner }}"
+      group: "{{ group }}"
+      mode: 0755 
 
   - name: Starting containers via docker-compose
     community.docker.docker_compose:
-      project_src: /home/jinon/psql_grafana/
+      project_src: /home/{{ owner }}/psql_grafana/
     vars:
       ansible_python_interpreter: /bin/python3
     register: docker_output

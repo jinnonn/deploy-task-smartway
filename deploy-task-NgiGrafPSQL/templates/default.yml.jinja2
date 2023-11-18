@@ -3,10 +3,10 @@ apiVersion: 1
 datasources:
   - name: Postgres
     type: postgres
-    url: 10.129.0.13:5432
-    uid: 1234simpledatasource1234
-    user: egoruser
+    url: {{ ansible_default_ipv4.address }}:5432
+    uid: {{ uid }}
+    user: {{ user }}
     secureJsonData:
-      password: '12345678'
+      password: {{ password }}
     jsonData:
-      database: egordb
+      database: {{ database }}
