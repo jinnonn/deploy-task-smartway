@@ -1,6 +1,6 @@
 ---
 - name: deploy-grafana-postgres
-  hosts: grafana-postgres
+  hosts: all
   become: yes
   tasks:
     - name: Deploying grafana and postgres containers

@@ -1,2 +1,3 @@
 ---
 # vars file for deploy-task-NgiGrafPSQL
+  ansible_ssh_common_args: '-o StrictHostKeyChecking=accept-new' # For skipping 'yes' in the first time connection to hosts via ssh

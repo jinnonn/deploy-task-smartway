@@ -1,1 +1,20 @@
----
+--- # Nginx installation and proxy configuration
+
+  - name: Nginx installation
+    ansible.builtin.apt:
+      name: nginx
+      state: present
+      update_cache: true
+  
+  - name: Proxy configuration
+    template:
+      src: "proxy.jinja2"
+      dest: /etc/nginx/sites-enabled/proxy
+      owner: "{{ owner }}"
+      group: "{{ group }}"
+      mode: 0755     
+
+  - name: Reloading configuration
+    ansible.builtin.service:
+      name: nginx
+      state: restarted
